@@ -1,6 +1,6 @@
 import { type NextPage } from "next";
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { trpc } from "../utils/trpc";
 
 const months = [
@@ -23,8 +23,6 @@ const Home: NextPage = () => {
   const mutation = trpc.messages.findOne.useMutation();
   const [showHelp, setShowHelp] = useState(true);
 
-  let status = mutation.status;
-
   const formatDate = (date: Date) => {
     const d = new Date(date);
     return `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
@@ -43,7 +41,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="min-w-screen grid min-h-screen items-center justify-center bg-black">
-        {status == "loading" ? (
+        {mutation.status == "loading" ? (
           <div className="flex items-center justify-center">
             <div
               className="spinner-border inline-block h-8 w-8 animate-spin rounded-full border-4 border-gray-800"
