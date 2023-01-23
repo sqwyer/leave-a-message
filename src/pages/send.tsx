@@ -18,6 +18,7 @@ const Home: NextPage = () => {
   }
 
   if (mutation.status == "error") console.log(mutation.error.message);
+  if (mutation.status == "success") window.open("/", "_self");
 
   return (
     <>
